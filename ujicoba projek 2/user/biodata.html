@@ -326,6 +326,8 @@
     </div>
 
     <script>
+        // GANTI script di biodata.html dengan yang ini
+// GANTI script di biodata.html dengan yang ini
         document.getElementById('biodataForm').addEventListener('submit', function(e) {
             e.preventDefault();
             
@@ -333,12 +335,12 @@
             if (!validateForm()) {
                 return;
             }
-    
+
             // Calculate BMI
             const weight = parseFloat(document.getElementById('weight').value);
             const height = parseFloat(document.getElementById('height').value) / 100;
             const bmi = weight / (height * height);
-    
+
             // Ambil data dari form
             const userBiodata = {
                 fullName: document.getElementById('fullName').value,
@@ -356,21 +358,24 @@
                 waterIntake: parseInt(document.getElementById('waterIntake').value),
                 mentalStatus: document.getElementById('mentalStatus').value,
                 healthNotes: document.getElementById('healthNotes').value,
-                registrationDate: new Date().toLocaleString('id-ID'),
-                lastUpdate: new Date().toLocaleString('id-ID'),
-                userId: Date.now()
+                registrationDate: new Date().toLocaleDateString('id-ID'),
+                lastUpdate: new Date().toLocaleDateString('id-ID'),
+                userId: Date.now().toString()
             };
-    
+
+            console.log('Data yang akan disimpan:', userBiodata);
+
             // Simpan ke localStorage user
             localStorage.setItem('userBiodata', JSON.stringify(userBiodata));
-    
-            // Simpan ke admin data
+
+            // Simpan ke admin data - PERBAIKAN DI SINI
             saveToAdminData(userBiodata);
             
             // Redirect ke halaman utama user
+            alert('Data berhasil disimpan! Mengarahkan ke dashboard...');
             window.location.href = 'index.html';
         });
-    
+
         function validateForm() {
             const systolic = parseInt(document.getElementById('systolic').value);
             const diastolic = parseInt(document.getElementById('diastolic').value);
@@ -382,24 +387,46 @@
             
             return true;
         }
-    
+
+        // PERBAIKAN FUNGSI INI - Pastikan data tersimpan dengan benar
         function saveToAdminData(userData) {
-            let adminData = JSON.parse(localStorage.getItem('adminMembersData')) || [];
-            const existingIndex = adminData.findIndex(member => member.email === userData.email);
-            
-            if (existingIndex !== -1) {
-                adminData[existingIndex] = userData;
-            } else {
-                adminData.push(userData);
+            try {
+                // Ambil data yang sudah ada atau buat array kosong
+                let adminData = JSON.parse(localStorage.getItem('adminMembersData')) || [];
+                
+                console.log('Data admin sebelum:', adminData);
+                
+                // Cek apakah user sudah ada berdasarkan email
+                const existingIndex = adminData.findIndex(member => member.email === userData.email);
+                
+                if (existingIndex !== -1) {
+                    // Update data yang sudah ada
+                    adminData[existingIndex] = userData;
+                    console.log('Data diperbarui untuk:', userData.email);
+                } else {
+                    // Tambah data baru
+                    adminData.push(userData);
+                    console.log('Data baru ditambahkan untuk:', userData.email);
+                }
+                
+                // Simpan kembali ke localStorage
+                localStorage.setItem('adminMembersData', JSON.stringify(adminData));
+                
+                // Verifikasi penyimpanan
+                const verifiedData = JSON.parse(localStorage.getItem('adminMembersData'));
+                console.log('Data admin setelah disimpan:', verifiedData);
+                console.log('Total member tersimpan:', verifiedData.length);
+                
+            } catch (error) {
+                console.error('Error saving to admin data:', error);
+                alert('Error menyimpan data ke sistem admin: ' + error.message);
             }
-            
-            localStorage.setItem('adminMembersData', JSON.stringify(adminData));
         }
-    
+
         // BMI calculation
         document.getElementById('weight').addEventListener('input', calculateBMI);
         document.getElementById('height').addEventListener('input', calculateBMI);
-    
+
         function calculateBMI() {
             const weight = document.getElementById('weight').value;
             const height = document.getElementById('height').value;
@@ -420,15 +447,27 @@
                 }
             }
         }
-    
-        // HAPUS SEMUA VALIDASI REAL-TIME - biarkan user bebas mengetik
+
+        // Data default untuk testing
         document.addEventListener('DOMContentLoaded', function() {
+            // Set nilai default untuk memudahkan testing
             document.getElementById('systolic').value = '120';
             document.getElementById('diastolic').value = '80';
             document.getElementById('age').value = '25';
-            document.getElementById('weight').value = '60';
+            document.getElementById('weight').value = '65';
             document.getElementById('height').value = '170';
             document.getElementById('waterIntake').value = '8';
+            
+            // Auto fill untuk testing cepat
+            document.getElementById('fullName').value = 'User Test ' + Math.floor(Math.random() * 1000);
+            document.getElementById('email').value = 'test' + Math.floor(Math.random() * 1000) + '@example.com';
+            document.getElementById('phone').value = '08123456' + Math.floor(Math.random() * 1000);
+            
+            // Set gender default
+            document.querySelector('input[name="gender"][value="Laki-laki"]').checked = true;
+            document.getElementById('mentalStatus').value = 'Baik';
+            
+            console.log('Form biodata siap digunakan');
         });
     </script>
 </body>
