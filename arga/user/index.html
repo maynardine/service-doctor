@@ -1,0 +1,1405 @@
+<!doctype html>
+<html class="no-js" lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
+	<title>Healthy Life - Kelompok 5</title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link rel="shortcut icon" type="image/x-icon" href="assets/img/logo/logo healthy life.png">
+	<!-- Place favicon.ico in the root directory -->
+
+	<!-- ========================= CSS here ========================= -->
+	<link rel="stylesheet" href="assets/css/bootstrap-5.0.5-alpha.min.css">
+	<link rel="stylesheet" href="assets/css/LineIcons.2.0.css">
+	<link rel="stylesheet" href="assets/css/animate.css">
+	<link rel="stylesheet" href="assets/css/tiny-slider.css">
+	<link rel="stylesheet" href="assets/css/main.css">
+
+
+</head>
+
+<body>
+	<!--[if lte IE 9]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
+        <![endif]-->
+
+	<!-- ========================= preloader start ========================= -->
+		<!-- Tambahkan bagian ini di dalam <body> sebelum konten utama -->
+	<script>
+		// Cek apakah user sudah login dan punya biodata
+		const userBiodata = JSON.parse(localStorage.getItem('userBiodata'));
+		
+		if (!userBiodata) {
+			// Jika tidak ada biodata, redirect ke halaman biodata
+			window.location.href = 'biodata.html';
+		}
+	</script>
+
+	<!-- Tambahkan bagian profil user di header atau sidebar -->
+	<div class="user-profile-widget" style="position: fixed; top: 20px; right: 20px; background: white; padding: 15px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); z-index: 1000; max-width: 250px;">
+		<div class="user-info" style="text-align: center;">
+			<div class="user-avatar" style="width: 60px; height: 60px; background: #00ADB5; border-radius: 50%; margin: 0 auto 10px; display: flex; align-items: center; justify-content: center; color: white; font-size: 24px;">
+				<i class='bx bxs-user'></i>
+			</div>
+			<h5 style="margin: 5px 0; color: #333;" id="userDisplayName">Nama User</h5>
+			<p style="margin: 2px 0; font-size: 12px; color: #666;" id="userDisplayInfo">Usia • Gender</p>
+			<button onclick="logout()" class="btn" style="background: #e74c3c; color: white; padding: 5px 15px; font-size: 12px; margin-top: 8px; width: 100%;">Logout</button>
+		</div>
+	</div>
+
+	<script>
+		// Tampilkan data user
+		if (userBiodata) {
+			document.getElementById('userDisplayName').textContent = userBiodata.fullName;
+			document.getElementById('userDisplayInfo').textContent = `${userBiodata.age} tahun • ${userBiodata.gender}`;
+		}
+
+		function logout() {
+			// Hapus data dan redirect ke login
+			localStorage.removeItem('userBiodata');
+			window.location.href = '../SignUp_LogIn_Form.html';
+		}
+
+		// Tambahkan juga di bagian dashboard untuk menampilkan data lengkap
+		document.addEventListener('DOMContentLoaded', function() {
+			const userData = JSON.parse(localStorage.getItem('userBiodata'));
+			if (userData) {
+				// Tambahkan info user di dashboard
+				const userInfoSection = `
+					<div class="user-dashboard-info" style="background: #f8f9fa; padding: 20px; border-radius: 10px; margin-bottom: 30px;">
+						<h4 style="color: #00ADB5; margin-bottom: 15px;">👋 Selamat Datang, ${userData.fullName}!</h4>
+						<div class="row">
+							<div class="col-md-6">
+								<p><strong>Email:</strong> ${userData.email}</p>
+								<p><strong>Jenis Kelamin:</strong> ${userData.gender}</p>
+							</div>
+							<div class="col-md-6">
+								<p><strong>Usia:</strong> ${userData.age} tahun</p>
+								<p><strong>Bergabung:</strong> ${userData.registrationDate}</p>
+							</div>
+						</div>
+						${userData.phone ? `<p><strong>Telepon:</strong> ${userData.phone}</p>` : ''}
+						${userData.address ? `<p><strong>Alamat:</strong> ${userData.address}</p>` : ''}
+					</div>
+				`;
+				
+				// Sisipkan di awal konten dashboard
+				const dashboardContent = document.querySelector('.dashboard-container .dashboard-card');
+				if (dashboardContent) {
+					dashboardContent.insertAdjacentHTML('afterbegin', userInfoSection);
+				}
+			}
+		});
+	</script>
+	<div class="preloader">
+		<div class="loader">
+			<div class="ytp-spinner">
+				<div class="ytp-spinner-container">
+					<div class="ytp-spinner-rotator">
+						<div class="ytp-spinner-left">
+							<div class="ytp-spinner-circle"></div>
+						</div>
+						<div class="ytp-spinner-right">
+							<div class="ytp-spinner-circle"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- preloader end -->
+
+	<!-- ========================= header start ========================= -->
+	<header id="home" class="header">
+
+		<div class="header-wrapper">
+				<div class="navbar-area">
+					<div class="container">
+						<div class="row">
+							<div class="col-lg-12">
+								<nav class="navbar navbar-expand-lg">
+									<a class="navbar-brand brand-text" href="index.html">
+										HEALTHY LIFE
+									</a>
+									<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+										aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+										<span class="toggler-icon"></span>
+										<span class="toggler-icon"></span>
+										<span class="toggler-icon"></span>
+									</button>
+				
+									<div class="collapse navbar-collapse sub-menu-bar" id="navbarSupportedContent">
+										<ul id="nav" class="navbar-nav ml-auto">
+											<li class="nav-item active">
+												<a class="page-scroll active" href="#home">Home</a>
+											</li>
+											<li class="nav-item">
+												<a class="page-scroll" href="#about">About</a>
+											</li>
+											<li class="nav-item">
+												<a class="page-scroll" href="#services">Service</a>
+											</li>
+											<li class="nav-item">
+												<a class="page-scroll" href="#doctor">Doctor</a>
+											</li>
+											<li class="nav-item">
+												<a class="page-scroll" href="#blog">Blog</a>
+											</li>
+											<li class="nav-item">
+												<a class="page-scroll" href="#contact">Contact</a>
+											</li>
+										</ul>
+									</div> <!-- navbar collapse -->
+								</nav> <!-- navbar -->
+							</div>
+						</div> <!-- row -->
+					</div> <!-- container -->
+				</div> <!-- navbar area -->
+		</div>
+
+		<div class="slider-wrapper">
+			<!-- ========================= slider-section start ========================= -->
+			<section class="slider-section">
+				<div class="slider-active slick-style">
+					<div class="single-slider img-bg" style="background-image:url('assets/img/slider/olhraga\ jogging.jpg');">
+						<div class="container">
+							<div class="row">
+								<div class="col-xl-7 col-lg-8 col-md-10">
+									<div class="slider-content">
+										<h1 data-animation="fadeInDown" data-duration="1.5s" data-delay=".5s">Tentang Kami
+										</h1>
+										<p data-animation="fadeInLeft" data-duration="1.5s" data-delay=".7s">HEALTHY LIVE WEB </p>
+										<a href="#about" class="btn theme-btn page-scroll" data-animation="fadeInUp" data-duration="1.5s"
+											data-delay=".9s">Lihat Selengkapnya</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="single-slider img-bg" style="background-image:url('assets/img/slider/pexels-pavel-danilyuk-5998445.jpg');">
+						<div class="container">
+							<div class="row">
+								<div class="col-xl-7 col-lg-8 col-md-10">
+									<div class="slider-content">
+										<h1 data-animation="fadeInDown" data-duration="1.5s" data-delay=".5s">Butuh Bantuan Informasi Kesehatan?
+											  Kami Siap Menolong Anda!
+
+										</h1>
+										<p data-animation="fadeInLeft" data-duration="1.5s" data-delay=".7s">Hubungi kami kapan saja, dan kami
+											 akan dengan senang hati membantu Anda.</p>
+										<a href="#contact" class="btn theme-btn page-scroll" data-animation="fadeInUp" data-duration="1.5s"
+											data-delay=".9s">Hubungi Kami</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="single-slider img-bg" style="background-image:url('assets/img/slider/makanan\ sehat.jpg');">
+						<div class="container">
+							<div class="row">
+								<div class="col-xl-7 col-lg-8 col-md-10">
+									<div class="slider-content">
+										<h1 data-animation="fadeInDown" data-duration="1.5s" data-delay=".5s">Apa saja informasi yang Kami Sediakan?
+										</h1>
+										<p data-animation="fadeInLeft" data-duration="1.5s" data-delay=".7s"> Kami menyediakan informasi seputar
+											kesehatan yang membantu anda menjalani hidup lebih sehat. Mulai dari tips nutrisi dan pola makan,
+											 penjelasan tentang kesehatan mental, sampai panduan olahraga yang mudah dilakukan setiap hari. 
+										</p>
+										<a href="#services" class="btn theme-btn page-scroll" data-animation="fadeInUp" data-duration="1.5s"
+											data-delay=".9s">Lihat Selengkapnya</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+			<!-- ========================= slider-section end ========================= -->
+		</div>
+	</header>
+	<!-- ========================= header end ========================= -->
+
+
+
+	<!--========================= we-do-section start========================= -->
+	<section class="we-do-section pt-150">
+		<div class="shape shape-1">
+			<img src="assets/img/shapes/shape-1.svg" alt="">
+		</div>
+		<div class="container">
+			<div class="row">
+				<div class="col-xl-8 mx-auto">
+					<div class="section-title text-center mb-55">
+						<span class="wow fadeInDown" data-wow-delay=".2s">Web Informasi kesehatan :</span>
+						<h2 class="mb-15 wow fadeInUp" data-wow-delay=".4s">Solusi Lengkap Untuk Kesehatan Anda</h2>
+						<p class="wow fadeInUp" data-wow-delay=".6s">Temukan panduan hidup sehat mulai sekarang. 
+					    <br class="d-none d-lg-block"> Melalui aktivitas fisik, makanan bergizi, keseimbangan mental, dan layanan kesehatan profesional.</p>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xl-12 text-center">
+					<div class="graph mb-60">
+						<img class="health-image" src="assets/img/we-do/health cartoon.png" alt="">
+
+					</div>
+				</div>
+				
+				
+			</div>
+		</div>
+	</section>
+	<!--========================= we-do-section start========================= -->
+
+	<!-- ========================= about-section start ========================= -->
+	<section id="about" class="about-section pt-120">
+		<div class="shape shape-2">
+			<img src="assets/img/shapes/shape-2.svg" alt="">
+		</div>
+		<div class="container">
+			<div class="row">
+				<div class="col-xl-10 col-lg-11 mx-auto">
+					<div class="about-content text-center mb-55">
+						<div class="section-title mb-30">
+							<span class="wow fadeInDown" data-wow-delay=".2s">About </span>
+							<h2 class="mb-15 wow fadeInUp" data-wow-delay=".4s"> Healthy Life Web</h2>
+						</div>
+						<p class="mb-35 wow fadeInUp" data-wow-delay=".6s">Kami menyediakan beragam informasi seputar kesehatan
+							 yang dirancang untuk membantu Anda menjalani hidup yang lebih sehat dan seimbang. Di Healthy Life,
+							 Anda dapat menemukan tips nutrisi dan pola makan yang mudah diterapkan dalam kehidupan sehari-hari mulai
+							 dari cara memilih makanan yang lebih bergizi, memahami kebutuhan kalori, hingga membuat kebiasaan makan
+							 yang lebih teratur dan sehat.</p>
+
+						<p class="mb-35 wow fadeInUp" data-wow-delay=".6s"> Selain itu, kami juga memberikan penjelasan mengenai kesehatan
+							 mental, karena kami percaya bahwa pikiran yang sehat sama pentingnya dengan tubuh yang kuat. Anda akan menemukan
+							 berbagai edukasi tentang pengelolaan stres,
+							 cara meningkatkan fokus dan ketenangan, serta
+                             kebiasaan sederhana yang membantu menjaga keseimbangan emosi.</p>	
+						
+					
+                        <p class="mb-35 wow fadeInUp" data-wow-delay=".6s"> Untuk mendukung aktivitas fisik, kami menyediakan panduan olahraga
+							 yang praktis dan cocok untuk semua orang, baik pemula maupun yang 
+                             sudah terbiasa berolahraga. Latihan-latihan ini dirancang agar mudah dilakukan di rumah, tanpa membutuhkan 
+							 peralatan khusus, sehingga 
+                             Anda tetap bisa aktif kapan saja.</p>
+							
+
+                        <p class="mb-35 wow fadeInUp" data-wow-delay=".6s"> Kami juga menghadirkan informasi penting mengenai
+							 pertolongan pertama (first aid), seperti cara menangani cedera ringan, luka, pingsan,
+                             dan kondisi darurat lainnya. Pengetahuan ini bertujuan membantu Anda lebih siap menghadapi situasi tak terduga,
+							 baik untuk diri sendiri 
+                             maupun orang di sekitar.</p>
+
+                        <p class="mb-35 wow fadeInUp" data-wow-delay=".6s">Semua informasi disusun secara sederhana, jelas, dan terpercaya,
+							 agar setiap orang dapat memulai perjalanan hidup sehat dengan langkah 
+                             yang lebih terarah dan mudah dipahami..</p>
+						<a href="#" class="btn theme-btn wow fadeInUp" data-wow-delay=".8s">Home</a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="about-img text-center">
+			<img src="assets/img/about/healthy.png" alt="" class="zoom-img">
+		</div>
+	</section>
+	<!-- ========================= about-section end ========================= -->
+
+<!--================================ yg ada ubah ==============================-->
+	
+	<!--========================= service-section start ========================= -->
+	<section id="services" class="service-section pt-150">
+		<div class="shape shape-3">
+			<img src="assets/img/shapes/shape-3.svg" alt="">
+		</div>
+		<div class="container">
+			<div class="row">
+				<div class="col-xl-8 mx-auto">
+					<div class="section-title text-center mb-55">
+						<span class="wow fadeInDown" data-wow-delay=".2s">Services</span>
+						<h2 class="mb-15 wow fadeInUp" data-wow-delay=".4s">Topik Kesehatan</h2>
+						<p class="wow fadeInUp" data-wow-delay=".6s">Kami menyajikan informasi kesehatan yang ringkas,
+							mudah dipahami, dan bermanfaat untuk membantu dalam menjalani hidup yang lebih sehat setiap hari.
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-lg-4 col-md-6">
+					<div class="service-item mb-30">
+						<div class="service-icon mb-25">
+							<img src="assets/img/service/nutrition.png" class="icon-img" alt="service-nutrition"/>
+						</div>
+						<div class="service-content" id="footer-nutrition">
+							<h4>Nutrisi & Pola Makan</h4>
+							<p>Tips nutrisi dan pola makan untuk hidup lebih sehat</p>
+							<a href="#" class="read-more" data-toggle="modal" data-target="#modal-nutrition">
+								Read More <i class="lni lni-arrow-right"></i>
+							</a>
+						</div>
+						<div class="service-overlay img-bg"></div>
+					</div>
+				</div>
+				<div class="col-lg-4 col-md-6">
+					<div class="service-item mb-30">
+						<div class="service-icon mb-25">
+							<img src="assets/img/service/mental-health.png" class="icon-img" alt="service-mental"/>
+						</div>
+						<div class="service-content" id="footer-mental">
+							<h4>Kesehatan Mental</h4>
+							<p>Edukasi dan wawasan untuk menjaga keseimbangan mental</p>
+							<a href="#" class="read-more" data-toggle="modal" data-target="#modal-mental">
+								Read More <i class="lni lni-arrow-right"></i>
+							</a>
+						</div>
+						<div class="service-overlay img-bg"></div>
+					</div>
+				</div>
+				<div class="col-lg-4 col-md-6">
+					<div class="service-item mb-30">
+						<div class="service-icon mb-25">
+							<img src="assets/img/service/exercise.png" class="icon-img" alt="service-exercise"/>
+						</div>
+						<div class="service-content" id="footer-exercise">
+							<h4>Kebugaran</h4>
+							<p>Tips untuk membuat tubuh lebih bugar</p>
+							<a href="#" class="read-more" data-toggle="modal" data-target="#modal-bugar">
+								Read More <i class="lni lni-arrow-right"></i>
+							</a>
+						</div>
+						<div class="service-overlay img-bg"></div>
+					</div>
+				</div>
+				<div class="col-lg-4 col-md-6">
+					<div class="service-item mb-30">
+						<div class="service-icon mb-25">
+							<img src="assets/img/service/first-aid.png" class="icon-img" alt="service-first-aid"/>
+						</div>
+						<div class="service-content" id="footer-firstaid">
+							<h4>Pertolongan Pertama</h4>
+							<p>Panduan dasar menghadapi situasi darurat</p>
+							<a href="#" class="read-more" data-toggle="modal" data-target="#modal-firstaid">
+								Read More <i class="lni lni-arrow-right"></i>
+							</a>
+						</div>
+						<div class="service-overlay img-bg"></div>
+					</div>
+				</div>
+				<div class="col-lg-4 col-md-6">
+					<div class="service-item mb-30">
+						<div class="service-icon mb-25">
+							<img src="assets/img/service/medical.png" class="icon-img" alt="service-medical"/>
+						</div>
+						<div class="service-content" id="footer-lifestyle">
+							<h4>Gaya Hidup Sehat</h4>
+							<p>Artikel untuk kebiasaan hidup lebih sehat</p>
+							<a href="#" class="read-more" data-toggle="modal" data-target="#modal-lifestyle">
+								Read More <i class="lni lni-arrow-right"></i>
+							</a>
+						</div>
+						<div class="service-overlay img-bg"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<div class="modal fade" id="modal-nutrition" tabindex="-1" aria-hidden="true">
+  		<div class="modal-dialog modal-dialog-centered modal-lg">
+    		<div class="modal-content">
+
+      		<div class="modal-header">
+        		<h5 class="modal-title">Nutrisi & Pola Makan</h5>
+        		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          			<span aria-hidden="true">&times;</span>
+        		</button>
+      		</div>
+
+      		<div class="modal-body">
+    			<div class="poin">
+        			<b>1. Perbanyak Makanan Utuh (Whole Foods)</b><br>
+					- Sayur dan buah berbagai warna<br>
+					- Biji-bijian utuh (beras merah, oatmeal, quinoa)<br>
+					- Kacang-kacangan, tempe, tahu<br>
+					- Ikan, telur, daging tanpa lemak<br>
+
+    			</div>
+    			<div class="poin">
+        			<b>2. Cukupi Kebutuhan Cairan</b><br>
+					- Minum 6-8 gelas air per hari (lebih jika banyak berkeringat)<br>
+					- Batasi minuman manis dan soda<br>
+					- Tahu kapan perlu beristirahat<br>
+    			</div>
+				<div class="poin">
+        			<b>3. Terapkan Porsi Seimbang</b><br>
+					- ½ piring sayur dan buah<br>
+					- ¼ piring protein<br>
+					- ¼ piring karbohidrat kompleks<br>
+					Model ini bantu kenyang lebih lama dan kontrol kalori<br>
+    			</div>
+				<div class="poin">
+        			<b>4. Atur Waktu Makan</b><br>
+					- Jangan melewatkan sarapan<br>
+					- Makan ketika lapar, bukan bosan/stres<br>
+					- Jeda makan teratur 3-4 jam untuk menjaga energi stabil<br>
+    			</div>
+				<div class="poin">
+        			<b>5. Pilih Lemak Sehat</b><br>
+					- Alpukat, kacang-kacangan, zaitun<br>
+					- Ikan berlemak (salmon, sarden)<br>
+					- Minyak zaitun<br>Hindari: gorengan berulang pakai, margarin padat, fast food tinggi lemak trans<br>
+    			</div>
+				<div class="poin">
+        			<b>6. Kurangi Gula Tambahan</b><br>
+					- Hindari minuman manis<br>
+					- Kurangi kue, permen, boba, roti manis<br>
+					- Cek label: pilih < 5g gula per porsi<br>
+    			</div>
+				<div class="poin">
+        			<b>7. Batasi Garam & Makanan Olahan</b><br>Terlalu banyak garam meningkatkan risiko hipertensi<br>
+					- Mie instan<br>
+					- Sosis, nugget, ham<br>
+					- Keripik asin<br>
+					- Bumbu instan<br>
+    			</div>
+				<div class="poin">
+        			<b>8. Serat Harian Cukup</b><br>Serat bantu pencernaan dan stabilkan gula darah<br>
+					- Sayur hijau<br>
+					- Buah (apel, pir, pisang, berry)<br>
+					- Oatmeal<br>
+					- Kacang-kacangan<br>
+    			</div>
+			</div>
+
+    		</div>
+  		</div>
+	</div>
+
+	<div class="modal fade" id="modal-mental" tabindex="-1" aria-hidden="true">
+  		<div class="modal-dialog modal-dialog-centered modal-lg">
+    		<div class="modal-content">
+
+      		<div class="modal-header">
+        		<h5 class="modal-title">Kesehatan Mental</h5>
+        		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          			<span aria-hidden="true">&times;</span>
+        		</button>
+      		</div>
+
+      		<div class="modal-body">
+    			<div class="poin">
+        			<b>1. Kenali Tanda-Tanda Stres dan Kelelahan Mental</b><br>Memahami gejalanya membantu kamu mengambil langkah lebih cepat. Contohnya :<br>
+					- Mudah marah atau tersinggung<br>
+					- Sulit fokus<br>
+					- Merasa lelah terus-menerus<br>
+					- Tidur tidak nyenyak<br>
+					- Kehilangan minat pada hal-hal yang biasanya disukai<br>
+					- Sering cemas tanpa sebab jelas<br>
+    			</div>
+    			<div class="poin">
+        			<b>2. Pentingnya Self-Awareness (Kesadaran Diri)</b><br>
+					- Menyadari emosi yang muncul<br>
+					- Mengerti batasan energi diri<br>
+					- Tahu kapan perlu beristirahat<br>
+					- Bisa berkata "tidak" saat sudah kewalahan<br>Semakin sadar, semakin mudah menjaga keseimbangan<br>
+    			</div>
+				<div class="poin">
+        			<b>3. Atur Pola Hidup yang Sehat</b><br>
+					- Tidur cukup 7-9 jam<br>
+					- Makan bernutrisi<br>
+					- Minum cukup air<br>
+					- Rutin bergerak atau olahraga ringan<br>
+					- Kurangi konsumsi kafein berlebihan<br>
+					- Kurangi paparan media sosial bila terasa melelahkan<br>
+    			</div>
+				<div class="poin">
+        			<b>4. Bangun Hubungan Sosial yang Sehat</b><br>
+					- Ceritakan perasaan pada orang yang dipercaya<br>
+					- Luangkan waktu untuk keluarga/teman<br>
+					- Hindari lingkungan yang toksik<br>
+					- Jaga komunikasi yang jujur dan sehat<br>
+					Interaksi yang positif bisa meningkatkan hormon bahagia<br>
+    			</div>
+				<div class="poin">
+        			<b>5. Kelola Emosi dengan Teknik Simpel</b><br>Beberapa teknik mudah yang bisa kamu lakukan kapan saja :<br>
+					- Pernapasan 4-7-8<br>(Tarik napas 4 detik → tahan 7 detik → hembuskan 8 detik)<br>
+					- Journaling<br>(Tulis perasaan untuk mengurangi tekanan pikiran)<br>
+					- Grounding 5-4-3-2-1<br>(Lihat 5 benda → sentuh 4 hal → dengar 3 suara → cium 2 aroma → rasakan 1 sensasi) berguna saat cemas<br>
+    			</div>
+				<div class="poin">
+        			<b>6. Beri Ruang untuk Istirahat Mental</b><br>Kesehatan mental bukan selalu produktif, tetapi seimbang, lakukan :<br>
+					- Waktu "me time" tanpa rasa bersalah<br>
+					- Hobi yang membuat kamu rileks<br>
+					- Istirahat dari tuntutan orang lain<br>
+    			</div>
+				<div class="poin">
+        			<b>7. Normalisasi Mencari Bantuan Profesional</b><br>Pergi ke psikolog bukan tanda lemah, tetapi bentuk perawatan diri, konsultasi tepat jika:<br>
+					- Emosi terasa tidak terkendali<br>
+					- Sulit tidur berkepanjangan<br>
+					- Overthinking mengganggu aktivitas<br>
+					- Merasa putus asa terus-menerus<br>
+    			</div>
+				<div class="poin">
+        			<b>8. Menerima Bahwa Tidak Harus Selalu Baik-Baik Saja</b><br>Kesehatan mental bukan berarti harus selalu bahagia, yang penting:<br>
+					- Bisa mengelola emosi<br>
+					- Tahu kapan butuh bantuan<br>
+					- Mampu kembali stabil setelah terguncang<br>
+    			</div>
+			</div>
+
+    		</div>
+  		</div>
+	</div>
+
+	<div class="modal fade" id="modal-bugar" tabindex="-1" aria-hidden="true">
+  		<div class="modal-dialog modal-dialog-centered modal-lg">
+    		<div class="modal-content">
+
+      		<div class="modal-header">
+        		<h5 class="modal-title">Kebugaran</h5>
+        		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          			<span aria-hidden="true">&times;</span>
+        		</button>
+      		</div>
+
+      		<div class="modal-body">
+    			<div class="poin">
+        			<b>1. Bergerak Secara Teratur</b><br>Tidak harus olahraga berat, cukup :
+					- Jalan cepat 20-30 menit<br>
+					- Stretching 5-10 menit pagi/sore<br>
+					- Naik turun tangga<br>
+					- Senam ringan di rumah<br>
+					Kuncinya konsisten, bukan beratnya latihan
+    			</div>
+    			<div class="poin">
+        			<b>2. Atur Pola Makan yang Seimbang</b><br>
+					- Perbanyak sayur dan buah<br>
+					- Karbohidrat kompleks (nasi merah, oat)<br>
+					- Protein cukup (telur, ayam, ikan, tempe)<br>
+					- Kurangi gula tambahan dan gorengan<br>
+					- Minum air 6-8 gelas/hari<br>
+    			</div>
+				<div class="poin">
+        			<b>3. Tidur Cukup & Teratur</b><br>
+					- Ideal 7-9 jam per malam<br>
+					- Hindari begadang<br>
+					- Kurangi layar HP 30 menit sebelum tidur<br>Tidur adalah fondasi kebugaran<br>
+    			</div>
+				<div class="poin">
+        			<b>4. Kelola Stres</b><br>
+					- Napas dalam 5 menit<br>
+					- Mendengarkan musik<br>
+					- Journaling<br>
+					- Melakukan hobi kecil<br>
+    			</div>
+				<div class="poin">
+        			<b>5. Penuhi Hidrasi</b><br>
+					- Dehidrasi ringan saja sudah bikin cepat capek, minum sebelum haus.<br>
+				</div>
+				<div class="poin">
+        			<b>6. Paparan Matahari Pagi</b><br>
+					- 5-15 menit tiap pagi<br>
+					- Membantu mood dan energi meningkat<br>
+    			</div>
+				<div class="poin">
+        			<b>7. Kurangi Kebiasaan yang Menguras Energi</b><br>
+					- Kurangi rokok & alkohol<br>
+					- Batasi kafein (maks. 1-2 gelas/hari)<br>
+					- Kurangi makanan tinggi gulabr<br>
+    			</div>
+			</div>
+			</div>
+
+    		</div>
+  		</div>
+	</div>
+
+	<div class="modal fade" id="modal-firstaid" tabindex="-1" aria-hidden="true">
+  		<div class="modal-dialog modal-dialog-centered modal-lg">
+    		<div class="modal-content">
+
+      		<div class="modal-header">
+        		<h5 class="modal-title">Pertolongan Pertama</h5>
+        		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          			<span aria-hidden="true">&times;</span>
+        		</button>
+      		</div>
+
+      		<div class="modal-body">
+    			<div class="poin">
+        			<b>1. Tetap Tenang & Amankan Situasi</b><br>Hal pertama yang harus dilakukan :<br>
+					- Jangan panik, tarik napas dalam<br>
+					- Pastikan lokasi aman dari bahaya (api, listrik, kendaraan)<br>
+					- Pindahkan korban hanya jika tempatnya berisiko<br>
+    			</div>
+    			<div class="poin">
+        			<b>2. Hubungi Bantuan Medis</b><br>Segera minta pertolongan jika :<br>
+					- Korban tidak sadarkan diri<br>
+					- Mengalami perdarahan berat<br>
+					- Sesak napas atau nyeri dada<br>
+					- Terjadi kecelakaan besar<br>
+    			</div>
+				<div class="poin">
+        			<b>3. Periksa Kesadaran dan Pernapasan (Cek Respon)</b><br>Langkah dasar :<br>
+					- Panggil korban, sentuh bahu secara lembut<br>
+					- Jika tidak merespons, periksa napas 10 detik<br>
+					- Bila tidak bernapas → lakukan CPR bila mampu<br>
+    			</div>
+				<div class="poin">
+        			<b>4. Hentikan Perdarahan</b><br>Cara cepat :<br>
+					- Tekan area luka dengan kain bersih atau perban<br>
+					- Angkat bagian yang berdarah (jika memungkinkan)<br>
+					- Jangan lepas tekanan sampai bantuan datang<br>
+    			</div>
+				<div class="poin">
+        			<b>5. Tangani Luka & Cedera Ringan</b><br>Untuk pertolongan cepat :<br>
+					- Cuci luka dengan air bersih yang mengalir<br>
+					- Oles antiseptik seperlunya<br>
+					- Tutup dengan perban steril<br>
+					Untuk memar/sprain: kompres dingin 10-15 menit
+    			</div>
+				<div class="poin">
+        			<b>6. Pertolongan Pertama pada Luka Bakar</b><br>Langkah aman :<br>
+					- Dinginkan area terbakar dengan air mengalir 10-20 menit<br>
+					- Jangan oles pasta gigi, mentega, atau minyak<br>
+					- Tutup dengan kain bersih yang tidak menempel<br>
+    			</div>
+				<div class="poin">
+        			<b>7. Atasi Tersedak (Choking)</b><br>Jika korban masih bisa batuk :<br>
+					- Biarkan ia terus batuk untuk mengeluarkan benda<br>Jika tidak bisa bernapas :<br>
+					- Tepuk punggung 5 kali di antara tulang belikat<br>
+					- Lakukan abdominal thrusts (manuver Heimlich) jika terlatih<br>
+    			</div>
+				<div class="poin">
+        			<b>8. Penanganan Pingsan</b><br>Jika seseorang pingsan :<br>
+					- Baringkan korban dan angkat kakinya sedikit<br>
+					- Longgarkan pakaian ketat<br>
+					- Biarkan mendapat udara segar<br>
+					Jika tidak sadar > 1 menit → hubungi bantuan
+    			</div>
+				<div class="poin">
+        			<b>9. Kenali Situasi yang Tidak Boleh Diobati Sendiri</b><br>Segera cari pertolongan profesional jika :<br>
+					- Patah tulang terbuka<br>
+					- Luka sangat dalam<br>
+					- Keracunan makanan/obat/bahan kimia<br>
+					- Luka bakar parah<br>
+					- Reaksi alergi berat (anafilaksis)<br>
+    			</div>
+			</div>
+
+    		</div>
+  		</div>
+	</div>
+
+	<div class="modal fade" id="modal-lifestyle" tabindex="-1" aria-hidden="true">
+  		<div class="modal-dialog modal-dialog-centered modal-lg">
+    		<div class="modal-content">
+
+      		<div class="modal-header">
+        		<h5 class="modal-title">Gaya Hidup Sehat</h5>
+        		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          			<span aria-hidden="true">&times;</span>
+        		</button>
+      		</div>
+
+      		<div class="modal-body">
+    			<div class="poin">
+        			<b>1. Bergizi Seimbang</b><br>
+        			Artikel WHO menjelaskan pola makan sehat yang menekankan konsumsi buah, sayur,
+        			protein tanpa lemak, dan karbohidrat kompleks untuk mencegah obesitas, diabetes, dan penyakit jantung.<br>
+        			<a href="https://www.who.int/news-room/fact-sheets/detail/healthy-diet"
+           				target="_blank" rel="noopener noreferrer">Baca artikel WHO di sini</a>
+    			</div>
+    			<div class="poin">
+        			<b>2. Aktivitas Fisik Rutin</b><br>
+        			CDC menjelaskan bahwa 150 menit aktivitas fisik per minggu meningkatkan kesehatan jantung, kekuatan otot,
+        			dan suasana hati. Jalan kaki pun sudah termasuk aktivitas bermanfaat.<br>
+        			<a href="https://www.cdc.gov/physicalactivity/basics/index.htm"
+           				target="_blank" rel="noopener noreferrer">Baca artikel CDC di sini</a>
+    			</div>
+				<div class="poin">
+        			<b>3. Tidur yang Cukup</b><br>
+        			Harvard menegaskan bahwa tidur 7-9 jam penting untuk fungsi otak, memori, emosi, dan pemulihan tubuh.<br>
+        			<a href="https://www.health.harvard.edu/staying-healthy/the-importance-of-sleep"
+           				target="_blank" rel="noopener noreferrer">Baca artikel Harvard Medical School di sini</a>
+    			</div>
+				<div class="poin">
+        			<b>4. Mengelola Stres dengan Baik</b><br>
+        			Mayo Clinic menyarankan meditasi, pernapasan dalam, journaling, dan hobi untuk membantu mengurangi stres kronis.<br>
+        			<a href="https://www.mayoclinic.org/healthy-lifestyle/stress-management/basics/stress-basics/hlv-20049495"
+           				target="_blank" rel="noopener noreferrer">Baca artikel Mayo Clinic di sini</a>
+    			</div>
+				<div class="poin">
+        			<b>5. Minum Air yang Cukup</b><br>
+        			EFSA menyarankan sekitar 2 liter air per hari untuk dewasa. Dehidrasi dapat menurunkan fokus dan energi.<br>
+        			<a href="https://www.efsa.europa.eu/en/efsajournal/pub/1459"
+           				target="_blank" rel="noopener noreferrer">Baca artikel ESFA di sini</a>
+    			</div>
+				<div class="poin">
+        			<b>6. Kebiasaan Buruk (Merokok & Alkohol)</b><br>
+        			CDC menyebutkan merokok sebagai penyebab utama kematian yang dapat dicegah, sementara alkohol berlebih merusak hati,
+					 jantung, dan meningkatkan risiko kanker.<br>
+        			<a href="https://www.cdc.gov/tobacco/basic_information/health_effects/index.htm"
+           				target="_blank" rel="noopener noreferrer">Baca artikel CDC di sini</a>
+    			</div>
+				<div class="poin">
+        			<b>7. Pemeriksaan Kesehatan Rutin</b><br>
+        			WHO menekankan pentingnya melakukan check-up rutin untuk mendeteksi penyakit lebih awal,
+					 seperti hipertensi, diabetes, atau kolesterol tinggi.<br>
+        			<a href="https://www.who.int/health-topics/screening"
+           				target="_blank" rel="noopener noreferrer">Baca artikel WHO di sini</a>
+    			</div>
+			</div>
+
+    		</div>
+  		</div>
+	</div>
+	<!--========================= service-section end ========================= -->
+
+	<!--========================= faq-section start ========================= -->
+	<section id="doctor" class="faq-section theme-bg">
+		<div class="faq-video-wrapper">
+			<div class="faq-video">
+				<img src="assets/img/doctor/doctor-img.jpg" alt="">
+			</div>
+		</div>
+		<div class="shape">
+			<img src="assets/img/shapes/shape-8.svg" alt="" class="shape-faq">
+		</div>
+		<div class="container">
+			<div class="row">
+				<div class="col-xl-6 offset-xl-6 col-lg-8 col-md-10">
+					<div class="faq-content-wrapper pt-90 pb-90">
+						<div class="section-title">
+							<span class="text-white wow fadeInDown" data-wow-delay=".2s">Keahlian Teruji, 
+								Perawatan yang Tulus</span>
+							<h2 class="text-white mb-35 wow fadeInUp" data-wow-delay=".4s">Dokter-dokter di
+								sekitaran Airmadidi :
+							</h2>
+						</div>
+						<div class="faq-wrapper accordion" id="accordionExample">
+							<div class="faq-item mb-20">
+								<div id="headingOne">
+									<h5 class="mb-0">
+										<button class="faq-btn btn" type="button" data-toggle="collapse" data-target="#collapseOne"
+											aria-expanded="true" aria-controls="collapseOne">
+											Dr. Anita Singal Mars <i class="lni"></i>
+										</button>
+									</h5>
+								</div>
+
+								<div id="collapseOne" class="collapse show" aria-labelledby="headingOne"
+									data-parent="#accordionExample">
+									<div class="faq-content">
+										<b>Jam Operasional : </b><br>
+										Senin-Sabtu 16.30-19.30<br>
+										Minggu Tutup<br>
+										<b>No. Telp :</b> -<br>
+										<b>Alamat :</b>
+										<a href="https://maps.app.goo.gl/TqNKYcoKXNEviWFU8" target="_blank">
+											Airmadidi Atas, Kec. Airmadidi, Kabupaten Minahasa Utara, Sulawesi Utara 
+										</a>
+									</div>
+								</div>
+							</div>
+							<div class="faq-item mb-20">
+								<div id="headingTwo">
+									<h5 class="mb-0">
+										<button class="faq-btn btn collapsed" type="button" data-toggle="collapse"
+											data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+											Dr. Berlin Simajuntak <i class="lni"></i>
+										</button>
+									</h5>
+								</div>
+
+								<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+									<div class="faq-content">
+										<b>Jam Operasional : </b><br>
+										Senin-Sabtu 17.00-22.00<br>
+										Minggu Tutup<br>
+										<b>No. Telp :</b><br>
+										(0431) 7005540<br>
+										<b>Alamat :</b>
+										<a href="https://maps.app.goo.gl/SRhTjAWFaaH1wKvTA" target="_blank">
+											Sukur, Kec. Airmadidi, Kabupaten Minahasa Utara, Sulawesi Utara
+										</a>
+									</div>
+								</div>
+							</div>
+							<div class="faq-item mb-20">
+								<div id="headingThree">
+									<h5 class="mb-0">
+										<button class="faq-btn btn collapsed" type="button" data-toggle="collapse"
+											data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
+											Dr. Maria. M. Luntungan <i class="lni"></i>
+										</button>
+									</h5>
+								</div>
+
+								<div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+									<div class="faq-content">
+										<b>Jam Operasional : </b><br>
+										Senin-Sabtu 16.00-21.00<br>
+										Minggu Tutup<br>
+										<b>No. Telp :</b><br> 
+										085398427451<br>
+										<b>Alamat :</b>
+										<a href="https://maps.app.goo.gl/4mQR8fo2ruaBU2Je8" target="_blank">
+											Tumaluntung, Kec. Kauditan, Kabupaten Minahasa Utara, Sulawesi Utara
+										</a>
+									</div>
+								</div>
+							</div>
+							<div class="faq-item">
+								<div id="headingFour">
+									<h5 class="mb-0">
+										<button class="faq-btn btn collapsed" type="button" data-toggle="collapse"
+											data-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour">
+											Dr. A.S.L. Bolang <i class="lni"></i>
+										</button>
+									</h5>
+								</div>
+
+								<div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionExample">
+									<div class="faq-content">
+										<b>Jam Operasional : </b>-<br>
+										<b>No. Telp : </b>-<br>
+										<b>Alamat :</b>
+										<a href="https://maps.app.goo.gl/ESX1UNFtcdSD6aMS6" target="_blank">
+											Airmadidi Atas, Kec. Airmadidi, Kabupaten Minahasa Utara, Sulawesi Utara
+										</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!--========================= faq-section end ========================= -->
+
+<!--=============================== sampe sini =============================== -->
+
+	<!-- ========================= blog-section start ========================= -->
+	<section id="blog" class="blog-section pt-150 pb-150">
+        <div class="shape shape-7">
+            <img src="assets/img/shapes/shape-6.svg" alt="">
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-8 mx-auto">
+                    <div class="section-title text-center mb-55">
+                        <span class="wow fadeInDown" data-wow-delay=".2s">Health Tools</span>
+                        <h2 class="mb-15 wow fadeInUp" data-wow-delay=".4s">Cek Kesehatan Mandiri</h2>
+                        <p class="wow fadeInUp" data-wow-delay=".4s">Gunakan fitur di bawah ini untuk memantau kondisi tubuh Anda.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                
+                <div class="col-lg-8 col-md-12">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="single-blog mb-30 wow fadeInUp" data-wow-delay=".2s">
+                                <div class="blog-img">
+                                    <a href="#"><img src="assets/img/blog/blog-1.png" alt=""></a>
+                                </div>
+                                <div class="blog-content" id="footer-jantung">
+                                    <h4><a href="#">Tips Jantung Sehat</a></h4>
+                                    <p>Cara menjaga kesehatan jantung sejak dini dengan pola hidup teratur.</p>
+                                   <a class="read-more" href="javascript:void(0)" data-toggle="modal" data-target="#modalJantung">Read More <i class="lni lni-arrow-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="single-blog mb-30 wow fadeInUp" data-wow-delay=".4s">
+                                <div class="blog-img">
+                                    <a href="#"><img src="assets/img/blog/blog-2.png" alt=""></a>
+                                </div>
+                                <div class="blog-content" id="">
+                                    <h4><a href="#">Pentingnya Hidrasi</a></h4>
+                                    <p>Kenapa air putih sangat penting untuk fungsi otak dan tubuh.</p>
+                                    <a class="read-more" href="javascript:void(0)" data-toggle="modal" data-target="#modalHidrasi">Read More <i class="lni lni-arrow-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-12">
+                    
+                    <div class="sidebar-widget wow fadeInRight" data-wow-delay=".4s">
+                        <div class="calculator-widget">
+                            <h4 class="widget-title">1. Cek BMI (Berat Badan)</h4>
+                            <form id="bmiWidgetForm" onsubmit="return false">
+                                <div class="mb-3">
+                                    <input type="number" class="form-control mb-2" id="sidebarWeight" placeholder="Berat (kg)">
+                                    <input type="number" class="form-control" id="sidebarHeight" placeholder="Tinggi (cm)">
+                                </div>
+                                <button type="button" class="btn theme-btn btn-sm w-100" onclick="calculateSidebarBMI()">Hitung BMI</button>
+                            </form>
+                            <div id="sidebarResult" class="mt-3" style="display:none; border-top: 1px dashed #ccc; padding-top: 10px;">
+                                <p>BMI Anda: <strong id="sidebarBmiValue" style="color:#00adb5;"></strong></p>
+                                <p><span id="sidebarBmiCategory" class="badge bg-secondary" style="color:white; padding:5px;"></span></p>
+                                <ul id="sidebarFoodList" class="text-sm pl-3" style="font-size: 13px; margin-top:5px;"></ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="sidebar-widget wow fadeInRight" data-wow-delay=".6s" style="margin-top: 30px;">
+                        <div class="calculator-widget">
+                            <h4 class="widget-title">2. Cek Kebutuhan Air</h4>
+                            <form id="waterWidgetForm" onsubmit="return false">
+                                <div class="mb-3">
+                                    <input type="number" class="form-control" id="waterWeight" placeholder="Berat Badan (kg)">
+                                </div>
+                                <button type="button" class="btn theme-btn btn-sm w-100" onclick="calculateWater()">Hitung Liter</button>
+                            </form>
+                            <div id="waterResult" class="mt-3" style="display:none; background: #e3f2fd; padding: 10px; border-radius: 5px;">
+                                <div class="text-center" style="color: #0d47a1;">
+                                    <strong><span id="waterLiters">0</span> Liter</strong> / hari<br>
+                                    <small>(Setara ± <span id="waterGlasses">0</span> gelas)</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="sidebar-widget wow fadeInRight" data-wow-delay=".8s" style="margin-top: 30px;">
+                        <div class="calculator-widget">
+                            <h4 class="widget-title">3. Cek Tensi Darah</h4>
+                            <form id="bpWidgetForm" onsubmit="return false">
+                                <div class="row mb-2">
+                                    <div class="col-6"><input type="number" class="form-control" id="bpSystolic" placeholder="Atas (Sys)"></div>
+                                    <div class="col-6"><input type="number" class="form-control" id="bpDiastolic" placeholder="Bawah (Dia)"></div>
+                                </div>
+                                <button type="button" class="btn theme-btn btn-sm w-100" onclick="checkBloodPressure()">Cek Status</button>
+                            </form>
+                            <div id="bpResult" class="mt-3" style="display:none; border-top: 1px dashed #ccc; padding-top: 10px;">
+                                <h5 id="bpStatus" class="text-center" style="font-weight:bold;">Normal</h5>
+                                <div id="bpAdvice" class="alert alert-light text-sm mt-2" style="font-size:12px; background:#f9f9f9; padding:5px;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+	<!-- ========================= blog-section end ========================= -->
+<!-- ========================= blog-section end ========================= -->
+
+<!-- ========================= consultation-section start ========================= -->
+<section id="consultation" class="consultation-section pt-150 pb-150">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-8 mx-auto">
+                <div class="section-title text-center mb-55">
+                    <span class="wow fadeInDown" data-wow-delay=".2s">Butuh Bantuan?</span>
+                    <h2 class="mb-15 wow fadeInUp" data-wow-delay=".4s">Konsultasi dengan Admin</h2>
+                    <p class="wow fadeInUp" data-wow-delay=".6s">Hubungi admin kami untuk konsultasi kesehatan yang lebih personal</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-xl-8 mx-auto">
+                <div class="consultation-widget wow fadeInUp" data-wow-delay=".8s" style="background: white; padding: 40px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); text-align: center;">
+                    <h4 style="color: #00ADB5; margin-bottom: 30px;">
+                        <i class='bx bxs-message-alt-dots'></i> Pilih Jenis Konsultasi
+                    </h4>
+                    
+                    <div class="consultation-options" style="margin-bottom: 30px;">
+                        <button class="btn btn-primary btn-consultation" onclick="showConsultationForm('umum')" style="padding: 15px 30px; margin: 10px; border: none; border-radius: 8px; font-size: 16px; transition: all 0.3s ease;">
+                            <i class='bx bxs-chat'></i> Konsultasi Umum
+                        </button>
+                        <button class="btn btn-danger btn-consultation" onclick="showConsultationForm('mental')" style="padding: 15px 30px; margin: 10px; border: none; border-radius: 8px; font-size: 16px; transition: all 0.3s ease;">
+                            <i class='bx bxs-brain'></i> Kesehatan Mental
+                        </button>
+                        <button class="btn btn-warning btn-consultation" onclick="showConsultationForm('darurat')" style="padding: 15px 30px; margin: 10px; border: none; border-radius: 8px; font-size: 16px; transition: all 0.3s ease;">
+                            <i class='bx bxs-first-aid'></i> Konsultasi Darurat
+                        </button>
+                    </div>
+
+                    <div style="background: #f8f9fa; padding: 20px; border-radius: 10px;">
+                        <p style="margin: 0; color: #666;">
+                            <i class='bx bxs-info-circle'></i> Admin akan merespons konsultasi Anda dalam 1x24 jam
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Modal Konsultasi -->
+<div class="modal fade" id="consultationModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color: #00ADB5; color: white;">
+                <h5 class="modal-title" id="modalTitle">Konsultasi</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="filter: invert(1);"></button>
+            </div>
+            <div class="modal-body">
+                <form id="consultationForm">
+                    <input type="hidden" id="consultationType">
+                    <div class="mb-3">
+                        <label for="consultationMessage" class="form-label">Pesan Konsultasi:</label>
+                        <textarea class="form-control" id="consultationMessage" rows="5" placeholder="Jelaskan keluhan, pertanyaan, atau masalah kesehatan Anda..."></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                <button type="button" class="btn btn-primary" onclick="submitConsultation()">Kirim ke Admin</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Fungsi untuk menampilkan modal konsultasi
+    function showConsultationForm(type) {
+        const consultationType = document.getElementById('consultationType');
+        const modalTitle = document.getElementById('modalTitle');
+        
+        consultationType.value = type;
+        
+        // Set judul modal berdasarkan jenis konsultasi
+        const titles = {
+            'umum': 'Konsultasi Kesehatan Umum',
+            'mental': 'Konsultasi Kesehatan Mental', 
+            'darurat': 'Konsultasi Darurat'
+        };
+        
+        modalTitle.textContent = titles[type] || 'Konsultasi';
+        
+        // Tampilkan modal menggunakan Bootstrap
+        const modal = new bootstrap.Modal(document.getElementById('consultationModal'));
+        modal.show();
+    }
+
+    // Fungsi untuk submit konsultasi
+    function submitConsultation() {
+        const userData = JSON.parse(localStorage.getItem('userBiodata'));
+        const message = document.getElementById('consultationMessage').value;
+        const type = document.getElementById('consultationType').value;
+        
+        if (!message.trim()) {
+            alert('Silakan tulis pesan konsultasi Anda.');
+            return;
+        }
+
+        if (!userData) {
+            alert('Silakan lengkapi biodata Anda terlebih dahulu.');
+            return;
+        }
+
+        const consultationData = {
+            id: Date.now(),
+            type: type,
+            message: message,
+            user: {
+                name: userData.fullName,
+                email: userData.email,
+                phone: userData.phone,
+                age: userData.age,
+                gender: userData.gender
+            },
+            timestamp: new Date().toLocaleString('id-ID'),
+            status: 'pending'
+        };
+
+        // Simpan ke admin
+        saveConsultationToAdmin(consultationData);
+        
+        // Tutup modal dan reset form
+        bootstrap.Modal.getInstance(document.getElementById('consultationModal')).hide();
+        document.getElementById('consultationMessage').value = '';
+        
+        // Tampilkan notifikasi sukses
+        alert('✅ Konsultasi berhasil dikirim! Admin akan menghubungi Anda dalam 1x24 jam.');
+    }
+
+    function saveConsultationToAdmin(consultation) {
+        try {
+            let consultations = JSON.parse(localStorage.getItem('adminConsultations')) || [];
+            consultations.push(consultation);
+            localStorage.setItem('adminConsultations', JSON.stringify(consultations));
+            
+            // Update notifikasi admin
+            updateAdminNotifications();
+        } catch (error) {
+            console.error('Error saving consultation:', error);
+        }
+    }
+
+    function updateAdminNotifications() {
+        try {
+            const consultations = JSON.parse(localStorage.getItem('adminConsultations')) || [];
+            const pendingCount = consultations.filter(c => c.status === 'pending').length;
+            localStorage.setItem('adminConsultationNotifications', pendingCount.toString());
+        } catch (error) {
+            console.error('Error updating notifications:', error);
+        }
+    }
+
+    // Add hover effects to consultation buttons
+    document.querySelectorAll('.btn-consultation').forEach(btn => {
+        btn.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateY(-2px)';
+            this.style.boxShadow = '0 5px 15px rgba(0,0,0,0.2)';
+        });
+        
+        btn.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateY(0)';
+            this.style.boxShadow = 'none';
+        });
+    });
+
+	
+    // Fungsi untuk mengirim data ke WhatsApp
+    function sendToWhatsapp() {
+        const name = document.getElementById('waName').value;
+        const number = document.getElementById('waNumber').value;
+        const service = document.getElementById('waService').value;
+        const message = document.getElementById('waMessage').value;
+
+        if (!name || !number || !message) {
+            alert('Harap isi semua field yang wajib diisi.');
+            return;
+        }
+
+        const userData = JSON.parse(localStorage.getItem('userBiodata'));
+        let userInfo = '';
+        
+        if (userData) {
+            userInfo = `\n\nData User:\n- Nama: ${userData.fullName}\n- Usia: ${userData.age}\n- Gender: ${userData.gender}\n- BMI: ${userData.bmi}`;
+        }
+
+        const finalMessage = `Halo Admin HealthyLife,\n\nSaya ${name} (${number})\nKeperluan: ${service}\nPesan: ${message}${userInfo}`;
+        
+        const encodedMessage = encodeURIComponent(finalMessage);
+        const whatsappUrl = `https://wa.me/6281234567890?text=${encodedMessage}`;
+        
+        window.open(whatsappUrl, '_blank');
+    }
+
+    // Auto-fill form dengan data user jika ada
+    document.addEventListener('DOMContentLoaded', function() {
+        const userData = JSON.parse(localStorage.getItem('userBiodata'));
+        
+        if (userData) {
+            document.getElementById('waName').value = userData.fullName;
+            document.getElementById('waNumber').value = userData.phone || '';
+            
+            // Update user profile widget
+            document.getElementById('userDisplayName').textContent = userData.fullName;
+            document.getElementById('userDisplayInfo').textContent = `${userData.age} tahun • ${userData.gender}`;
+        }
+    });
+</script>
+<!-- ========================= consultation-section end ========================= -->
+
+<!-- ========================= contact-section start ========================= -->
+	<!-- ========================= contact-section start ========================= -->
+<section id="contact" class="contact-section pt-150 pb-150">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-8 mx-auto">
+                    <div class="section-title text-center mb-55">
+                        <span class="wow fadeInDown" data-wow-delay=".2s">Hubungi Kami</span>
+                        <h2 class="mb-15 wow fadeInUp" data-wow-delay=".4s">Konsultasi via WhatsApp</h2>
+                        <p class="wow fadeInUp" data-wow-delay=".6s">Klik tombol di bawah untuk terhubung langsung dengan admin.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-xl-8 mx-auto">
+                    <div class="contact-form-wrapper wow fadeInUp" data-wow-delay=".8s" style="background: #fff; padding: 40px; border-radius: 10px; box-shadow: 0 0 20px rgba(0,0,0,0.05); border: 1px solid #eee;">
+                        <form id="whatsappForm" onsubmit="return false;">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label>Nama Lengkap</label>
+                                        <input type="text" id="waName" class="form-control" placeholder="Nama Anda" style="background: #f9f9f9; height: 50px; margin-bottom: 15px; padding: 0 15px;">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label>Nomor WhatsApp</label>
+                                        <input type="number" id="waNumber" class="form-control" placeholder="08xxxxxxxx" style="background: #f9f9f9; height: 50px; margin-bottom: 15px; padding: 0 15px;">
+                                    </div>
+                                </div>
+                            </div>
+							<div class="row">
+                                <div class="col-md-12">
+                                    <div class="mb-3">
+                                        <label>Keperluan</label>
+                                        <select id="waService" class="form-control" style="background: #f9f9f9; height: 50px; margin-bottom: 15px; padding: 0 15px;">
+                                            <option value="Tanya Info">Tanya Informasi Umum</option>
+                                            <option value="Booking Dokter">Booking Jadwal Dokter</option>
+                                            <option value="Darurat">Gawat Darurat</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="mb-3">
+                                        <label>Pesan</label>
+                                        <textarea id="waMessage" class="form-control" rows="4" placeholder="Tulis pesan Anda..." style="background: #f9f9f9; padding: 15px; margin-bottom: 15px;"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 text-center">
+                                    <button type="button" onclick="sendToWhatsapp()" class="btn theme-btn" style="width: 100%; padding: 15px;">
+                                        <i class="lni lni-whatsapp"></i> KIRIM PESAN SEKARANG
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+	<!-- ========================= contact-section end ========================= -->
+
+	<!-- ========================= footer start ========================= -->
+	<footer class="footer pt-100 img-bg" style="background-image:url('assets/img/bg/footer-bg.jpg');">
+		<div class="container">
+			<div class="footer-widget-wrapper">
+				<div class="row">
+					<div class="col-xl-4 col-lg-5 col-md-6">
+						<div class="footer-widget mb-30">
+							<a href="index.html" class="logo"> HEALTHY LIFE
+							<p>
+								Terima kasih telah mengunjungi website kami, Tuhan memberkati.
+							</p>
+							<div class="footer-social-links">
+								<ul>
+									<li><a href="#"><i class="lni lni-facebook-filled"></i></a></li>
+									<li><a href="#"><i class="lni lni-twitter-filled"></i></a></li>
+									<li><a href="#"><i class="lni lni-linkedin-original"></i></a></li>
+									<li><a href="#"><i class="lni lni-instagram-original"></i></a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div class="col-xl-2 col-lg-3 col-md-6">
+						<div class="footer-widget mb-30">
+							<h4>Quick Link</h4>
+							<ul class="footer-links">
+								<li><a href="#">Home</a></li>
+								<li><a href="#">About</a></li>
+								<li><a href="#">Services</a></li>
+								<li><a href="#">Doctor</a></li>
+								<li><a href="#">Blog</a></li>
+								<li><a href="#">Contact</a></li>
+							</ul>
+						</div>
+					</div>
+					<div class="col-xl-2 col-lg-3 col-md-5">
+						<div class="footer-widget mb-30">
+							<h4>Quick Link</h4>
+							<ul class="footer-links">
+								<li><a href="#footer-nutrition">Nutrisi & Pola Makan</a></li>
+								<li><a href="#footer-mental">Kesehatan Mental</a></li>
+								<li><a href="#footer-exercise">Kebugaran</a></li>
+								<li><a href="#footer-firstaid">Pertolongan Pertama</a></li>
+								<li><a href="#footer-lifestyle">Gaya Hidup Sehat</a></li>
+								<li><a href="#footer-jantung">Tips Jantung Sehat</a></li>
+								<li><a href="#footer-hidrasi">Pentingnya Hidrasi</a></li>
+							</ul>
+						</div>
+					</div>
+					<div class="col-xl-4 col-lg-12 col-md-7">
+						<div class="footer-widget mb-30">
+							<h4>Medical Location</h4>
+							<div class="map-canvas">
+								<iframe class="map" id="gmap_canvas"
+									src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15954.389440927009!2d124.97576880290046!3d1.
+									4174994004851247!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x32870a95df6309dd%3A0x21d86e4847556
+									add!2sUniversitas%20Klabat!5e0!3m2!1sen!2sid!4v1763362925818!5m2!1sen!2sid"></iframe>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="copyright-area">
+				<p class="mb-0 text-center">Web Design (Kelompok 5)</p>
+			</div>
+		</div>
+	</footer>
+	<!-- ========================= footer end ========================= -->
+
+
+	<!-- ========================= scroll-top ========================= -->
+	<a href="#" class="scroll-top">
+		<i class="lni lni-arrow-up"></i>
+	</a>
+
+	<div class="modal fade" id="modalJantung" tabindex="-1" aria-hidden="true" style="z-index: 99999;">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color: #00adb5; color: white;">
+                <h5 class="modal-title" style="color: white;">❤️ Tips Menjaga Kesehatan Jantung</h5>
+                <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close" style="background: none; border: none; color: white; font-size: 20px;">x</button>
+            </div>
+            <div class="modal-body" style="padding: 30px;">
+                <img src="assets/img/blog/blog-1.png" alt="Jantung" style="width: 100%; border-radius: 10px; margin-bottom: 20px;">
+                <p>Penyakit jantung adalah salah satu penyebab kematian tertinggi. Berikut adalah cara sederhana menjaganya:</p>
+                <ul style="list-style: disc; padding-left: 20px; margin-top: 10px; color: #555;">
+                    <li style="margin-bottom: 10px;"><strong>Aktif Bergerak:</strong> Lakukan olahraga kardio ringan seperti jalan cepat, berenang, atau bersepeda minimal 30 menit sehari.</li>
+                    <li style="margin-bottom: 10px;"><strong>Jaga Pola Makan:</strong> Kurangi makanan berlemak jenuh (gorengan) dan perbanyak ikan, sayuran hijau, serta buah-buahan.</li>
+                    <li style="margin-bottom: 10px;"><strong>Kelola Stres:</strong> Stres berlebih memicu tekanan darah tinggi. Luangkan waktu untuk relaksasi atau hobi.</li>
+                    <li style="margin-bottom: 10px;"><strong>Tidur Cukup:</strong> Kurang tidur dapat meningkatkan risiko pengerasan pembuluh darah arteri.</li>
+                    <li><strong>Berhenti Merokok:</strong> Bahan kimia dalam rokok sangat merusak lapisan pembuluh darah jantung.</li>
+                </ul>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modalHidrasi" tabindex="-1" aria-hidden="true" style="z-index: 99999;">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color: #00adb5; color: white;">
+                <h5 class="modal-title" style="color: white;">💧 Pentingnya Hidrasi Tubuh</h5>
+                <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close" style="background: none; border: none; color: white; font-size: 20px;">x</button>
+            </div>
+            <div class="modal-body" style="padding: 30px;">
+                <img src="assets/img/blog/blog-2.png" alt="Air" style="width: 100%; border-radius: 10px; margin-bottom: 20px;">
+                <p>Air menyusun sekitar 60% dari berat badan manusia. Kekurangan air (dehidrasi) bisa berakibat fatal.</p>
+                <h6 style="margin-top: 15px; color: #00adb5;">Manfaat Minum Air Cukup:</h6>
+                <ul style="list-style: disc; padding-left: 20px; margin-bottom: 15px; color: #555;">
+                    <li>Meningkatkan fungsi otak dan konsentrasi.</li>
+                    <li>Membantu ginjal membuang racun tubuh.</li>
+                    <li>Menjaga suhu tubuh tetap stabil.</li>
+                    <li>Membuat kulit lebih sehat dan cerah.</li>
+                </ul>
+                <h6 style="color: #e74c3c;">Tanda-tanda Dehidrasi:</h6>
+                <p style="font-size: 14px; color: #666;">Mulut kering, urin berwarna kuning pekat, pusing, dan mudah lelah. Jika merasakan ini, segera minum air putih minimal 2 gelas.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+	<!-- ========================= JS here ========================= -->
+	<script src="assets/js/bootstrap.bundle-5.0.0.alpha-min.js"></script>
+	<script src="assets/js/wow.min.js"></script>
+	<script src="assets/js/tiny-slider.js"></script>
+	<script src="assets/js/main.js"></script>
+</body>
+
+</html>

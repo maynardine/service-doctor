@@ -1,0 +1,722 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+    text-decoration: none;
+    list-style: none;
+}
+
+/* style.css - Main Stylesheet untuk Admin Hidup Sehat */
+
+:root {
+    --primary-blue: #00ADB5;
+    --secondary-blue: #4FD1C7;
+    --dark-blue: #00959C;
+    --light-blue: #E6FFFA;
+    --success: #48BB78;
+    --warning: #ED8936;
+    --danger: #F56565;
+    --dark: #2D3748;
+    --light: #F7FAFC;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f5f7fa;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* Sidebar Styles */
+.sidebar {
+    background: linear-gradient(135deg, var(--primary-blue) 0%, var(--dark-blue) 100%);
+    color: white;
+    min-height: 100vh;
+    box-shadow: 2px 0 15px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+}
+
+.sidebar-header {
+    padding: 20px 15px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.sidebar-header .logo {
+    max-width: 150px;
+    height: auto;
+}
+
+.sidebar .nav {
+    padding: 15px 0;
+}
+
+.sidebar .nav-link {
+    color: rgba(255,255,255,0.8);
+    padding: 12px 20px;
+    margin: 2px 15px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    font-weight: 500;
+}
+
+.sidebar .nav-link:hover {
+    background-color: rgba(255,255,255,0.15);
+    color: white;
+    transform: translateX(5px);
+}
+
+.sidebar .nav-link.active {
+    background-color: rgba(255,255,255,0.2);
+    color: white;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.sidebar .nav-link i {
+    margin-right: 10px;
+    width: 20px;
+    text-align: center;
+}
+
+/* Sidebar Stats */
+.sidebar-stats {
+    background: rgba(255,255,255,0.1);
+    border-radius: 10px;
+    margin: 15px;
+}
+
+.stats-content {
+    margin-top: 10px;
+}
+
+.stat-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 0;
+    font-size: 0.9rem;
+}
+
+.stat-item:not(:last-child) {
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+/* Main Content */
+.main-content {
+    background-color: #f5f7fa;
+    min-height: 100vh;
+}
+
+/* Navbar */
+.navbar {
+    background: white;
+    box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+    border-radius: 10px;
+}
+
+.breadcrumb {
+    margin-bottom: 0;
+}
+
+.breadcrumb-item a {
+    color: var(--primary-blue);
+    text-decoration: none;
+}
+
+/* Page Header */
+.page-title {
+    color: var(--dark-blue);
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+}
+
+.page-subtitle {
+    color: #6c757d;
+    font-size: 0.95rem;
+}
+
+/* Stats Cards */
+.stats-row {
+    margin-bottom: 1.5rem;
+}
+
+.stat-card {
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+    background: white;
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+
+.stat-card .card-body {
+    padding: 1.5rem;
+}
+
+.stat-number {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--primary-blue);
+    line-height: 1;
+}
+
+.stat-label {
+    color: #6c757d;
+    font-size: 0.9rem;
+    margin-top: 0.25rem;
+}
+
+.stat-icon {
+    font-size: 2.5rem;
+    color: var(--primary-blue);
+    opacity: 0.8;
+}
+
+.stat-trend {
+    font-size: 0.8rem;
+    margin-top: 0.5rem;
+}
+
+/* Cards */
+.card {
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    margin-bottom: 1.5rem;
+    transition: all 0.3s ease;
+}
+
+.card:hover {
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+
+.card-header {
+    background: white;
+    border-bottom: 2px solid var(--light-blue);
+    padding: 1.25rem 1.5rem;
+    font-weight: 600;
+    color: var(--dark-blue);
+}
+
+.card-title {
+    margin-bottom: 0;
+    font-weight: 600;
+}
+
+/* Activity List */
+.activity-list {
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.activity-item {
+    display: flex;
+    align-items: flex-start;
+    padding: 1rem 0;
+    border-bottom: 1px solid #f1f1f1;
+}
+
+.activity-item:last-child {
+    border-bottom: none;
+}
+
+.activity-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 1rem;
+    flex-shrink: 0;
+}
+
+.activity-icon.success {
+    background-color: rgba(72, 187, 120, 0.1);
+    color: var(--success);
+}
+
+.activity-icon.primary {
+    background-color: rgba(0, 173, 181, 0.1);
+    color: var(--primary-blue);
+}
+
+.activity-icon.info {
+    background-color: rgba(79, 209, 199, 0.1);
+    color: var(--secondary-blue);
+}
+
+.activity-icon.warning {
+    background-color: rgba(237, 137, 54, 0.1);
+    color: var(--warning);
+}
+
+.activity-content {
+    flex: 1;
+}
+
+.activity-text {
+    font-weight: 500;
+    margin-bottom: 0.25rem;
+}
+
+.activity-time {
+    font-size: 0.8rem;
+    color: #6c757d;
+}
+
+/* Tables */
+.table {
+    margin-bottom: 0;
+}
+
+.table th {
+    background-color: var(--light-blue);
+    color: var(--dark-blue);
+    border: none;
+    font-weight: 600;
+    padding: 1rem 0.75rem;
+}
+
+.table td {
+    padding: 1rem 0.75rem;
+    vertical-align: middle;
+    border-color: #f1f1f1;
+}
+
+.progress-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.progress {
+    flex: 1;
+    height: 8px;
+    border-radius: 10px;
+    background-color: #e9ecef;
+}
+
+.progress-bar {
+    border-radius: 10px;
+    background: linear-gradient(90deg, var(--primary-blue), var(--dark-blue));
+}
+
+/* Badges */
+.badge {
+    font-weight: 500;
+    padding: 0.35em 0.65em;
+}
+
+.bg-primary {
+    background: linear-gradient(135deg, var(--primary-blue), var(--dark-blue)) !important;
+}
+
+.bg-success {
+    background: linear-gradient(135deg, var(--success), #38A169) !important;
+}
+
+.bg-warning {
+    background: linear-gradient(135deg, var(--warning), #DD6B20) !important;
+}
+
+.bg-danger {
+    background: linear-gradient(135deg, var(--danger), #E53E3E) !important;
+}
+
+/* Buttons */
+.btn {
+    border-radius: 8px;
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    transition: all 0.3s ease;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--primary-blue), var(--dark-blue));
+    border: none;
+    box-shadow: 0 4px 15px rgba(0, 173, 181, 0.3);
+}
+
+.btn-primary:hover {
+    background: linear-gradient(135deg, var(--dark-blue), #00848A);
+    box-shadow: 0 6px 20px rgba(0, 173, 181, 0.4);
+    transform: translateY(-2px);
+}
+
+.btn-outline-primary {
+    color: var(--primary-blue);
+    border: 2px solid var(--primary-blue);
+    background: transparent;
+}
+
+.btn-outline-primary:hover {
+    background: var(--primary-blue);
+    border-color: var(--primary-blue);
+    box-shadow: 0 4px 15px rgba(0, 173, 181, 0.3);
+    transform: translateY(-2px);
+}
+
+.btn-sm {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.8rem;
+}
+
+/* Chart Container */
+.chart-container {
+    position: relative;
+    height: 250px;
+    width: 100%;
+}
+
+/* Utilities */
+.text-primary { color: var(--primary-blue) !important; }
+.bg-primary { background-color: var(--primary-blue) !important; }
+.bg-success { background-color: var(--success) !important; }
+.bg-warning { background-color: var(--warning) !important; }
+.bg-danger { background-color: var(--danger) !important; }
+
+/* User Avatar */
+.user-avatar {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--light-blue);
+}
+
+/* Notifications */
+.notification-badge {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background: var(--danger);
+    color: white;
+    border-radius: 50%;
+    width: 18px;
+    height: 18px;
+    font-size: 0.7rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .sidebar {
+        position: fixed;
+        top: 0;
+        left: -100%;
+        width: 280px;
+        height: 100vh;
+        z-index: 1050;
+        transition: left 0.3s ease;
+    }
+    
+    .sidebar.show {
+        left: 0;
+    }
+    
+    .main-content {
+        margin-left: 0;
+        padding: 0 10px;
+    }
+    
+    .stat-number {
+        font-size: 1.8rem;
+    }
+    
+    .stat-icon {
+        font-size: 2.2rem;
+    }
+    
+    .page-title {
+        font-size: 1.5rem;
+    }
+    
+    .card-header {
+        padding: 15px 20px;
+    }
+    
+    .table {
+        font-size: 0.85rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .stats-row .col-md-6 {
+        margin-bottom: 15px;
+    }
+    
+    .stat-card .card-body {
+        padding: 20px;
+    }
+    
+    .stat-number {
+        font-size: 1.6rem;
+    }
+    
+    .btn {
+        padding: 0.5rem 1rem;
+        font-size: 0.85rem;
+    }
+    
+    .navbar {
+        padding: 12px 15px;
+    }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--primary-blue);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--dark-blue);
+}
+
+/* Health Stats Styles */
+.health-stats {
+    padding: 10px 0;
+}
+
+.health-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.health-label {
+    width: 120px;
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.health-bar {
+    flex: 1;
+    height: 20px;
+    background-color: #e9ecef;
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+}
+
+.health-progress {
+    height: 100%;
+    border-radius: 10px;
+    text-align: center;
+    font-size: 0.7rem;
+    color: white;
+    font-weight: bold;
+    line-height: 20px;
+    transition: width 0.5s ease;
+}
+
+.health-progress.normal { background-color: #4caf50; }
+.health-progress.overweight { background-color: #ff9800; }
+.health-progress.obese { background-color: #f44336; }
+.health-progress.underweight { background-color: #2196f3; }
+.health-progress.warning { background-color: #ff9800; }
+.health-progress.danger { background-color: #f44336; }
+
+/* Notification Styles */
+.dropdown-menu {
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.badge {
+    font-size: 0.75em;
+}
+
+/* Page Content Styles */
+.page-content {
+    display: none;
+}
+
+.page-content.active {
+    display: block;
+}
+
+/* Report Item Styles */
+.report-item {
+    text-align: center;
+    padding: 20px;
+    border-radius: 10px;
+    background: #f8f9fa;
+}
+
+.report-item h6 {
+    color: #666;
+    margin-bottom: 10px;
+}
+
+.report-item h3 {
+    margin-bottom: 5px;
+}
+
+.report-item small {
+    color: #888;
+}
+
+/* Health Stats Styles */
+.health-stats {
+    padding: 10px 0;
+}
+
+.health-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.health-label {
+    width: 120px;
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.health-bar {
+    flex: 1;
+    height: 20px;
+    background-color: #e9ecef;
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+}
+
+.health-progress {
+    height: 100%;
+    border-radius: 10px;
+    text-align: center;
+    font-size: 0.7rem;
+    color: white;
+    font-weight: bold;
+    line-height: 20px;
+    transition: width 0.5s ease;
+}
+
+/* Member Management Styles */
+.user-avatar-sm {
+    font-weight: bold;
+}
+
+.table th {
+    background-color: var(--light-blue);
+    color: var(--dark-blue);
+    border: none;
+    font-weight: 600;
+    padding: 1rem 0.75rem;
+    font-size: 0.9rem;
+}
+
+.table td {
+    padding: 0.75rem;
+    vertical-align: middle;
+    border-color: #f1f1f1;
+    font-size: 0.875rem;
+}
+
+.btn-group-sm .btn {
+    padding: 0.25rem 0.5rem;
+}
+
+/* Search and Filter Styles */
+.form-control-sm {
+    height: calc(1.5em + 0.5rem + 2px);
+    padding: 0.25rem 0.5rem;
+    font-size: 0.875rem;
+}
+
+/* Badge Styles */
+.badge {
+    font-size: 0.75em;
+    font-weight: 500;
+}
+
+/* Reports Styles */
+.health-overview {
+    padding: 10px 0;
+}
+
+.health-metric {
+    margin-bottom: 20px;
+}
+
+.metric-label {
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.metric-value {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #00ADB5;
+    margin-bottom: 8px;
+}
+
+.metric-progress .progress {
+    height: 8px;
+    background-color: #e9ecef;
+}
+
+.trend-item {
+    padding: 20px;
+    border-radius: 10px;
+    background: #f8f9fa;
+    transition: all 0.3s ease;
+}
+
+.trend-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.trend-icon {
+    margin-bottom: 10px;
+}
+
+.trend-value {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+.trend-label {
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.bg-success { background-color: var(--success) !important; }
+.bg-warning { background-color: var(--warning) !important; }
+.bg-danger { background-color: var(--danger) !important; }
+.bg-info { background-color: var(--secondary-blue) !important; }
+
+/* No Data Message */
+.text-muted {
+    color: #6c757d !important;
+}
+
+.health-progress.normal { background-color: #4caf50; }
+.health-progress.overweight { background-color: #ff9800; }
+.health-progress.obese { background-color: #f44336; }
+.health-progress.underweight { background-color: #2196f3; }
+.health-progress.warning { background-color: #ff9800; }
+.health-progress.danger { background-color: #f44336; }
