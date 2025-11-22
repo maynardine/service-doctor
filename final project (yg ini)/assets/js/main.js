@@ -211,7 +211,7 @@ window.sendToWhatsapp = function() {
         // GANTI NOMOR ADMIN DISINI
         var adminPhone = "6289612224046"; 
 
-        var text = "Halo Admin Medic, saya ingin bertanya.%0A%0A" +
+        var text = "Halo Admin Healthy Life, saya ingin bertanya.%0A%0A" +
                    "*Nama:* " + name + "%0A" +
                    "*No HP:* " + number + "%0A" +
                    "*Keperluan:* " + service + "%0A" +
