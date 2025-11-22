@@ -439,67 +439,163 @@
 
                     <!-- Mental Health Content -->
 <!-- ========== HALAMAN KESEHATAN MENTAL ========== -->
-                    <div id="mental-healthContent" class="page-content" style="display:none;">
-                        <h2 class="mb-3">Kesehatan Mental Member</h2>
+                    <!-- Health Data Content -->
+                    <div id="health-dataContent" class="page-content">
+                        <div class="d-flex justify-content-between align-items-center mt-4 mb-3">
+                            <div>
+                                <h2 class="page-title">Data Kesehatan</h2>
+                                <p class="page-subtitle">Monitoring kesehatan fisik member</p>
+                            </div>
+                            <button class="btn btn-primary" onclick="refreshHealthData()">
+                                <i class="fas fa-sync-alt me-2"></i>Refresh Data
+                            </button>
+                        </div>
 
+                        <!-- Health Stats Cards -->
                         <div class="row mb-4">
-                            <div class="col-md-4">
-                                <div class="card p-3">
-                                    <h6>Baik</h6>
-                                    <h3 id="goodMentalCases">0</h3>
+                            <div class="col-md-3 mb-4">
+                                <div class="card stat-card">
+                                    <div class="card-body text-center">
+                                        <div class="stat-number text-primary" id="healthTotalMembers">0</div>
+                                        <div class="stat-label">Total Member</div>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="col-md-4">
-                                <div class="card p-3">
-                                    <h6>Perhatian</h6>
-                                    <h3 id="moderateMentalCases">0</h3>
+                            <div class="col-md-3 mb-4">
+                                <div class="card stat-card">
+                                    <div class="card-body text-center">
+                                        <div class="stat-number text-success" id="healthBMINormal">0%</div>
+                                        <div class="stat-label">BMI Normal</div>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="col-md-4">
-                                <div class="card p-3">
-                                    <h6>Butuh Bantuan</h6>
-                                    <h3 id="severeMentalCases">0</h3>
+                            <div class="col-md-3 mb-4">
+                                <div class="card stat-card">
+                                    <div class="card-body text-center">
+                                        <div class="stat-number text-success" id="healthBPNormal">0%</div>
+                                        <div class="stat-label">Tensi Normal</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 mb-4">
+                                <div class="card stat-card">
+                                    <div class="card-body text-center">
+                                        <div class="stat-number text-success" id="healthWaterOptimal">0%</div>
+                                        <div class="stat-label">Hidrasi Optimal</div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
 
+                        <!-- Health Data Table -->
                         <div class="card">
-                            <div class="card-header">Tabel Kesehatan Mental</div>
+                            <div class="card-header">
+                                <h5 class="card-title mb-0">
+                                    <i class="fas fa-table me-2"></i>Data Kesehatan Member
+                                </h5>
+                            </div>
                             <div class="card-body">
-                                <table class="table">
-                                    <thead>
-                                        <tr>
-                                            <th>Nama</th>
-                                            <th>Status Mental</th>
-                                            <th>Keterangan</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="mentalHealthTableBody"></tbody>
-                                </table>
+                                <div class="table-responsive">
+                                    <table class="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>Nama</th>
+                                                <th>Usia</th>
+                                                <th>Gender</th>
+                                                <th>BMI</th>
+                                                <th>Status BMI</th>
+                                                <th>Tekanan Darah</th>
+                                                <th>Status TD</th>
+                                                <th>Air/Hari</th>
+                                                <th>Update Terakhir</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="healthDataTableBody">
+                                            <!-- Data akan diisi oleh JavaScript -->
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div id="noHealthData" class="text-center py-4" style="display: none;">
+                                    <i class="fas fa-heartbeat fa-3x text-muted mb-3"></i>
+                                    <h5 class="text-muted">Belum ada data kesehatan</h5>
+                                    <p class="text-muted">Data akan muncul setelah member mengisi form kesehatan</p>
+                                </div>
                             </div>
                         </div>
                     </div>
 
+                    <!-- Mental Health Content -->
+                    <div id="mental-healthContent" class="page-content">
+                        <div class="d-flex justify-content-between align-items-center mt-4 mb-3">
+                            <div>
+                                <h2 class="page-title">Kesehatan Mental</h2>
+                                <p class="page-subtitle">Monitoring kesehatan mental member</p>
+                            </div>
+                            <button class="btn btn-primary" onclick="refreshMentalHealthData()">
+                                <i class="fas fa-sync-alt me-2"></i>Refresh Data
+                            </button>
+                        </div>
 
-                    <!-- ========== HALAMAN DATA KESEHATAN (HEALTH DATA) ========== -->
-                    <div id="health-dataContent" class="page-content" style="display:none;">
-                        <h2 class="mb-3">Data Kesehatan Member</h2>
+                        <!-- Mental Health Stats -->
+                        <div class="row mb-4">
+                            <div class="col-md-4 mb-4">
+                                <div class="card stat-card">
+                                    <div class="card-body text-center">
+                                        <div class="stat-number text-success" id="goodMentalCases">0</div>
+                                        <div class="stat-label">Kondisi Baik</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-4">
+                                <div class="card stat-card">
+                                    <div class="card-body text-center">
+                                        <div class="stat-number text-warning" id="moderateMentalCases">0</div>
+                                        <div class="stat-label">Perlu Perhatian</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-4">
+                                <div class="card stat-card">
+                                    <div class="card-body text-center">
+                                        <div class="stat-number text-danger" id="severeMentalCases">0</div>
+                                        <div class="stat-label">Butuh Bantuan</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
+                        <!-- Mental Health Table -->
                         <div class="card">
-                            <div class="card-header">Tabel Data Kesehatan</div>
+                            <div class="card-header">
+                                <h5 class="card-title mb-0">
+                                    <i class="fas fa-table me-2"></i>Data Kesehatan Mental
+                                </h5>
+                            </div>
                             <div class="card-body">
-                                <table class="table">
-                                    <thead>
-                                        <tr>
-                                            <th>Nama</th>
-                                            <th>Berat</th>
-                                            <th>Tinggi</th>
-                                            <th>Tekanan Darah</th>
-                                            <th>Air Minum</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="healthDataTableBody"></tbody>
-                                </table>
+                                <div class="table-responsive">
+                                    <table class="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>Nama</th>
+                                                <th>Usia</th>
+                                                <th>Gender</th>
+                                                <th>Status Mental</th>
+                                                <th>Urgensi</th>
+                                                <th>Bergabung</th>
+                                                <th>Status</th>
+                                                <th>Aksi</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="mentalHealthTableBody">
+                                            <!-- Data akan diisi oleh JavaScript -->
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div id="noMentalHealthData" class="text-center py-4" style="display: none;">
+                                    <i class="fas fa-brain fa-3x text-muted mb-3"></i>
+                                    <h5 class="text-muted">Belum ada data kesehatan mental</h5>
+                                    <p class="text-muted">Data akan muncul setelah member mengisi form kesehatan mental</p>
+                                </div>
                             </div>
                         </div>
                     </div>
