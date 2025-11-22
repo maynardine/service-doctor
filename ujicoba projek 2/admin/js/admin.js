@@ -1124,6 +1124,95 @@ class AdminApp {
         console.log('Notification:', message);
         alert(message);
     }
+
+    // Tambahkan method ini di class AdminApp
+    generateSampleData() {
+        const sampleData = [
+            {
+                fullName: "Budi Santoso",
+                email: "budi.santoso@example.com",
+                gender: "Laki-laki",
+                age: 28,
+                phone: "081234567890",
+                weight: 75,
+                height: "170",
+                bmi: 25.9,
+                bloodPressure: { systolic: 130, diastolic: 85 },
+                waterIntake: 6,
+                mentalStatus: "Perhatian",
+                healthNotes: "Sering merasa stres karena pekerjaan",
+                registrationDate: "23/11/2024",
+                lastUpdate: "23/11/2024",
+                userId: "1"
+            },
+            {
+                fullName: "Sari Dewi",
+                email: "sari.dewi@example.com",
+                gender: "Perempuan", 
+                age: 32,
+                phone: "081234567891",
+                weight: 58,
+                height: "160",
+                bmi: 22.7,
+                bloodPressure: { systolic: 115, diastolic: 75 },
+                waterIntake: 8,
+                mentalStatus: "Butuh Bantuan",
+                healthNotes: "Mengalami anxiety dan kesulitan tidur",
+                registrationDate: "22/11/2024",
+                lastUpdate: "23/11/2024",
+                userId: "2"
+            },
+            {
+                fullName: "Ahmad Rizki",
+                email: "ahmad.rizki@example.com",
+                gender: "Laki-laki",
+                age: 35,
+                phone: "081234567892",
+                weight: 80,
+                height: "175",
+                bmi: 26.1,
+                bloodPressure: { systolic: 140, diastolic: 90 },
+                waterIntake: 4,
+                mentalStatus: "Baik",
+                healthNotes: "Tidak ada keluhan khusus",
+                registrationDate: "21/11/2024",
+                lastUpdate: "23/11/2024",
+                userId: "3"
+            }
+        ];
+
+        // Simpan sample data ke localStorage
+        localStorage.setItem('adminMembersData', JSON.stringify(sampleData));
+        console.log('Sample data generated:', sampleData);
+        return sampleData;
+    }
+
+    // Modifikasi method loadRealMembersData menjadi:
+    loadRealMembersData() {
+        try {
+            // Get data from localStorage
+            let adminData = JSON.parse(localStorage.getItem('adminMembersData')) || [];
+            
+            // Jika tidak ada data, generate sample data untuk testing
+            if (adminData.length === 0) {
+                console.log('No members data found, generating sample data...');
+                adminData = this.generateSampleData();
+            }
+            
+            this.membersData = adminData;
+            this.filteredMembers = [...this.membersData];
+            
+            console.log('Loaded members data:', this.membersData);
+            return this.membersData;
+            
+        } catch (error) {
+            console.error('Error loading members data:', error);
+            // Fallback to sample data
+            this.membersData = this.generateSampleData();
+            this.filteredMembers = [...this.membersData];
+            return this.membersData;
+        }
+    }
 }
 
 // ==================== FUNGSI GLOBAL ====================
@@ -1272,6 +1361,21 @@ function generatePDFReport() {
             
             window.adminApp.showNotification('Laporan PDF berhasil diunduh', 'success');
         }, 2000);
+    }
+}
+
+// Tambahkan fungsi global ini
+function refreshHealthData() {
+    if (window.adminApp) {
+        window.adminApp.loadHealthData();
+        window.adminApp.showNotification('Data kesehatan diperbarui', 'success');
+    }
+}
+
+function refreshMentalHealthData() {
+    if (window.adminApp) {
+        window.adminApp.loadMentalHealthData();
+        window.adminApp.showNotification('Data kesehatan mental diperbarui', 'success');
     }
 }
 
